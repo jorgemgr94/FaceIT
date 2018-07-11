@@ -16,19 +16,11 @@ for (subdirs, dirs, files) in os.walk(fn_dir):
         for filename in fnmatch.filter(os.listdir(subjectpath), '*.png'):
             path = subjectpath + '/' + filename
             lable = id
-
-    
-            #image = cv2.imread(path, 0)
-            #images.append(cv2.resize(image, (220, 180)))
-
             images.append(cv2.imread(path, 0))
-
-
             lables.append(int(lable))
         id += 1
 (im_width, im_height) = (224, 184)
 (images, lables) = [numpy.array(lis) for lis in [images, lables]]
-#model = cv2.createFisherFaceRecognizer()
 
 model = cv2.face.FisherFaceRecognizer_create()
 model.train(images, lables)
