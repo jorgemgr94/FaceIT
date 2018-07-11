@@ -1,6 +1,6 @@
 # Face It!
 
-Face detection with Python 2.7.15 + Opencv OpenCV 3.4.2
+Face detection with Python 2.7.15 + Opencv 3.4.2
 
 ## Training mode
 
