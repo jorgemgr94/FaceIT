@@ -1,3 +1,2 @@
-*.jpg
-*.png
-*.jpeg
+subject_faces/**
+.DS_Store

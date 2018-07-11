@@ -1,4 +1,5 @@
-import cv2, sys, numpy, os
+import cv2, sys, numpy, os,fnmatch
+
 size = 4
 fn_haar = 'haarcascade_frontalface_alt.xml'
 fn_dir = 'subject_faces'
@@ -11,16 +12,27 @@ for (subdirs, dirs, files) in os.walk(fn_dir):
     for subdir in dirs:
         names[id] = subdir
         subjectpath = os.path.join(fn_dir, subdir)
-        for filename in os.listdir(subjectpath):
+        #for filename in os.listdir(subjectpath):
+        for filename in fnmatch.filter(os.listdir(subjectpath), '*.png'):
             path = subjectpath + '/' + filename
             lable = id
+
+    
+            #image = cv2.imread(path, 0)
+            #images.append(cv2.resize(image, (220, 180)))
+
             images.append(cv2.imread(path, 0))
+
+
             lables.append(int(lable))
         id += 1
 (im_width, im_height) = (224, 184)
 (images, lables) = [numpy.array(lis) for lis in [images, lables]]
-model = cv2.createFisherFaceRecognizer()
+#model = cv2.createFisherFaceRecognizer()
+
+model = cv2.face.FisherFaceRecognizer_create()
 model.train(images, lables)
+
 haar_cascade = cv2.CascadeClassifier(fn_haar)
 webcam = cv2.VideoCapture(0)
 
